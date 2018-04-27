@@ -93,5 +93,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\carré.bmp" />
+    <Resource Include="Images\close file.png" />
+    <Resource Include="Images\CROIX.bmp" />
+    <Resource Include="Images\jpc.bmp" />
+    <Resource Include="Images\ne pas sauvegarder celui-là.bmp" />
+    <Resource Include="Images\open file.png" />
+    <Resource Include="Images\rubik%27s cube - Negatif - Negatif.bmp" />
+    <Resource Include="Images\rubik%27s cube - Negatif.bmp" />
+    <Resource Include="Images\rubik%27s cube.bmp" />
+    <Resource Include="Images\save as file.png" />
+    <Resource Include="Images\save file.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

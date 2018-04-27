@@ -5,8 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MagasinDePhoto_PROFESSIONAL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Magasin De Photo - Professional Edition" Height="720" Width="1280">
+	<Grid Background="#FF1F1F1F">
+		<Canvas HorizontalAlignment="Left" Height="689" Margin="1048,0,0,0" VerticalAlignment="Top" Width="224" Background="#FF2B2B2B">
+			<Label x:Name="label" Content="Paramètres du filtre" Canvas.Left="10" Canvas.Top="481" Foreground="White"/>
+			<Label x:Name="label1" Content="Intensité du filtre" Canvas.Left="10" Canvas.Top="512" Foreground="White" FontSize="10"/>
+			<Slider x:Name="slider" Canvas.Left="100" Canvas.Top="512" Width="114" Height="23"/>
+		</Canvas>
+		<ToolBar VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#FF2D2D2D">
+			<Button x:Name="open_btn" Width="120" Height="60" Click="OpenImage">
+				<StackPanel>
+					<Image x:Name="open_folder"  HorizontalAlignment="Stretch" Width="100" Height="32" Source="Images\open file.png"/>
+					<Label Content="Ouvrir" HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+			<Button x:Name="save_btn" Width="120" Height="60" Click="SaveImage">
+				<StackPanel>
+					<Image x:Name="save_file" HorizontalAlignment="Stretch" Width="100" Height="32" Source="Images\save file.png"/>
+					<Label Content="Enregistrer" HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+			<Button x:Name="saveas_btn" Width="120" Height="60" Click="SaveAsImage">
+				<StackPanel>
+					<Image x:Name="saveas_file" HorizontalAlignment="Stretch" Width="100" Height="32" Source="Images\save as file.png"/>
+					<Label Content="Enregistrer sous..." HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+			<Button x:Name="close_btn" Width="120" Height="60" Click="CloseImage">
+				<StackPanel>
+					<Image x:Name="close_file" HorizontalAlignment="Stretch" Width="100" Height="32" Source="Images\close file.png"/>
+					<Label Content="Fermer l'image" HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+		</ToolBar>
+		<ToolBar x:Name="tlb_filters" Header="Filtres" VerticalAlignment="Stretch" HorizontalAlignment="Right" Background="#FF2B2B2B" Margin="0,-6,0,206" Foreground="#7FFFFFFF">
+			<Button x:Name="filter1" Width="70" Click="DisplayNoFilter">
+				<StackPanel>
+					<Image x:Name="no_filter_preview"/>
+					<Label Content="Aucun" HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+			<Button x:Name="filter2" Width="70" Click="DisplayNegative">
+				<StackPanel>
+					<Image x:Name="negative_filter_preview"/>
+					<Label Content="Négatif" HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+			<Button x:Name="filter4" Width="70" Click="DisplayBlacknWhite">
+				<StackPanel>
+					<Image x:Name="blacknwhite_filter_preview"/>
+					<Label Content="N&amp;B" HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+			<Button x:Name="filter3" Width="70" Click="DisplayBlur">
+				<StackPanel>
+					<Image x:Name="blur_filter_preview"/>
+					<Label Content="Flou" HorizontalAlignment="Center" Foreground="White"/>
+				</StackPanel>
+			</Button>
+			<Separator Background="#555"/>
+			<Button x:Name="filter5" Width="70">
+				<StackPanel>
+					<Image/>
+					<Label Content="On verra" Foreground="White"/>
+				</StackPanel>
+			</Button>
+		</ToolBar>
+
+		<Image x:Name="display_image" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,70,80,5"/>
+	</Grid>
 </Window>
