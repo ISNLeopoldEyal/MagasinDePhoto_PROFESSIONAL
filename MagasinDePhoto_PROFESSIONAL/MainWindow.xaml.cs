@@ -26,7 +26,7 @@ namespace MagasinDePhoto_PROFESSIONAL
         public BitmapSource blurFilterImage = null;
         public BitmapSource blacknWhiteFilterImage = null;
 
-        public int offset, reelWidthNoOffset, reelWidth, width, height, stride;
+        public int offset, reelWidthNoOffset, reelWidth, width, height, stride, intensity;
         public double dpiX, dpiY;
         public string openedFileUri;
         public string openedFileName;
@@ -37,6 +37,9 @@ namespace MagasinDePhoto_PROFESSIONAL
         {
             InitializeComponent();
             ChangeOrientationOfFiltersTlb();
+            intensity = 100;
+            intensity_slider.Value = intensity;
+            intensitySlider_label.Text = intensity + "%";
         }
 
         private void ChangeOrientationOfFiltersTlb()
@@ -50,7 +53,20 @@ namespace MagasinDePhoto_PROFESSIONAL
             filter4.LayoutTransform = rotate1;
             filter5.LayoutTransform = rotate1;
         }
+        
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (openedFileUri == null || openedFileUri == "")
+                return;
 
+            intensity = (int)Math.Round(intensity_slider.Value , 0);
+            intensitySlider_label.Text = intensity + "%";
+
+            CreateAllFilters();
+            if (negativeFilterImage != null)
+                display_image.Source = negativeFilterImage;
+        }
+        
         private byte[] GetBitArrayFromImage()
         {
             byte[] pixels = new byte[height * stride];
@@ -115,12 +131,12 @@ namespace MagasinDePhoto_PROFESSIONAL
         private void CreateAllFilters()
         {
             Thread negatiVeFilterThread = new Thread(CreateFilter_Negative) { Name = "Thread : Negatif" };
-            Thread blacknWhiteFilterThread = new Thread(CreateFilter_BlacknWhite) { Name = "Thread : Niveau de gris" };
-            Thread blurFilterThread = new Thread(CreateFilter_Blur) { Name = "Thread : Flou" };
+            //Thread blacknWhiteFilterThread = new Thread(CreateFilter_BlacknWhite) { Name = "Thread : Niveau de gris" };
+            //Thread blurFilterThread = new Thread(CreateFilter_Blur) { Name = "Thread : Flou" };
 
             negatiVeFilterThread.Start();
-            blacknWhiteFilterThread.Start();
-            blurFilterThread.Start();
+            //blacknWhiteFilterThread.Start();
+            //blurFilterThread.Start();
         }
 
         private void CreateFilter_Negative()
@@ -131,9 +147,13 @@ namespace MagasinDePhoto_PROFESSIONAL
 
                 for (int index = 0; index < array.Length; index += 4)
                 {
-                    array[index] = (byte)(255 - array[index]);
-                    array[index + 1] = (byte)(255 - array[index + 1]);
-                    array[index + 2] = (byte)(255 - array[index + 2]);
+                    double _intensity = intensity / 100f;
+
+                    array[index] = (byte)(((255 - array[index]) - array[index]) * _intensity + array[index]);
+                    array[index + 1] = (byte)   (((255 - array[index + 1]) - array[index + 1]) * _intensity + array[index + 1]);
+                    array[index + 2] = (byte)   (((255 - array[index + 2]) - array[index + 2]) * _intensity + array[index + 2]);
+
+                    debug_negatif.Text = _intensity + " ; " + intensity;
 
                     if (index % reelWidth == reelWidthNoOffset)
                         index += (offset - 4);
@@ -172,8 +192,7 @@ namespace MagasinDePhoto_PROFESSIONAL
                 blacknwhite_filter_preview.Source = blacknWhiteFilterImage;
             }));
         }
-
-
+        
         private void CreateFilter_Blur()
         {
             Dispatcher.BeginInvoke(new Action(() =>
@@ -353,7 +372,7 @@ namespace MagasinDePhoto_PROFESSIONAL
             SetGlobalVariables();
             CreateAllFilters();
         }
-
+        
         private void SaveImage(object sender, RoutedEventArgs e)
         {
             if (display_image.Source != null)

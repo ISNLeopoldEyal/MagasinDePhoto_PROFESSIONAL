@@ -7,11 +7,7 @@
         mc:Ignorable="d"
         Title="Magasin De Photo - Professional Edition" Height="720" Width="1280">
     <Grid Background="#FF1F1F1F">
-        <Canvas HorizontalAlignment="Left" Height="689" Margin="1048,0,0,0" VerticalAlignment="Top" Width="224" Background="#FF2B2B2B">
-            <Label x:Name="label" Content="Paramètres du filtre" Canvas.Left="10" Canvas.Top="480" Foreground="White" Height="27"/>
-            <Label x:Name="label1" Content="Intensité du filtre" Canvas.Left="10" Canvas.Top="512" Foreground="White" FontSize="10"/>
-            <Slider x:Name="slider" Canvas.Left="100" Canvas.Top="512" Width="114" Height="23"/>
-        </Canvas>
+        <Canvas HorizontalAlignment="Right" Width="283" Background="#FF2B2B2B" Margin="0,0,0,182"/>
         <ToolBar VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#FF2D2D2D">
             <Button x:Name="open_btn" Width="120" Height="60" Click="OpenImage">
                 <StackPanel>
@@ -80,5 +76,13 @@
         </ToolBar>
 
         <Image x:Name="display_image" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,70,80,5"/>
+        <Canvas Background="#FF2B2B2B" Height="182" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="283">
+            <Label x:Name="label_filterSettings" Content="Paramètres du filtre" Canvas.Top="10" Foreground="White" Height="27" Canvas.Left="10" FontSize="13" FontWeight="Bold" FontStyle="Italic"/>
+            <Label x:Name="label_intensityTitle" Content="Intensité du filtre" Canvas.Top="42" Foreground="White" Canvas.Left="10"/>
+            <Slider x:Name="intensity_slider" Canvas.Left="28" Canvas.Top="68" Width="217" Height="23" ValueChanged="slider_ValueChanged" SmallChange="1" Background="{x:Null}" Maximum="100"/>
+            <TextBlock x:Name="intensitySlider_label" Canvas.Left="250" TextWrapping="Wrap" Text="---" Canvas.Top="68" Foreground="White" Height="23" Width="52"/>
+            <Label x:Name="label_intensityTitle_Copy" Content="Négatif :" Canvas.Top="96" Foreground="White" Canvas.Left="10"/>
+            <TextBlock x:Name="debug_negatif" Canvas.Left="40" TextWrapping="Wrap" Text="TextBlock" Canvas.Top="134" Foreground="White" Height="38" Width="155" FontSize="16"/>
+        </Canvas>
     </Grid>
 </Window>
